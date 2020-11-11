@@ -23,3 +23,7 @@
 - Used Hive for Cache Management
 - Used Chewie for video rendereing
 - Used Firebase for Authentication and Database
+
+## **Demo:**
+
+![yellow_class gif](/demo/demo.gif)
