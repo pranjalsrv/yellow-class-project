@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
           } else if (snapshot.hasError) {
             return Text("Something Went Wrong");
           } else {
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           }
         },
       ),

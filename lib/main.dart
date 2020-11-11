@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,7 @@ void main() async {
   await Hive.initFlutter(); //Initializing Hive
   Hive.registerAdapter(ApiUserAdapter());
   await Hive.openBox<ApiUser>('userBox');
+
   runApp(YellowClassApp());
 }
 

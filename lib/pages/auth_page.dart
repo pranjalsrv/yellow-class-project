@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:yellow_class_project/controllers/auth_controller.dart';
 import 'package:yellow_class_project/controllers/user_controller.dart';
 import 'package:yellow_class_project/models/user.dart';
+import 'package:yellow_class_project/pages/home_page.dart';
 import 'package:yellow_class_project/pages/phone_auth_page.dart';
 
 class AuthPage extends StatefulWidget {
   static String routeName = "/auth_page";
+
   @override
   _AuthPageState createState() => _AuthPageState();
 }
@@ -105,26 +107,27 @@ class _AuthPageState extends State<AuthPage> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: OutlineButton(
                 onPressed: () async {
-                 FirebaseAuthController firebaseAuthController = FirebaseAuthController.to;
-                 UserController userController = UserController.to;
+                  FirebaseAuthController firebaseAuthController = FirebaseAuthController.to;
+                  UserController userController = UserController.to;
                   UserCredential userCred = await firebaseAuthController.autoSignInGoogle();
                   ApiUser user;
-                 if (userCred.additionalUserInfo.isNewUser) {
-                   print("[] New user google sign in");
-                   //New user
-                   user = userController.createNewUser(newUser: userCred.user);
-                   // user = await createUserInBackend(user: newUser);
-                 } else {
-                   //Old user, get from hive, if not present get from backend
-                   print("[] Fetch user with Firebase UID");
-                   user = await userController.getUserFromFirebase(firebaseUid: userCred.user.uid);
-                   UserController.to.user = user;
-                 }
+                  if (userCred.additionalUserInfo.isNewUser) {
+                    print("[] New user google sign in");
+                    //New user
+                    user = userController.createNewUser(newUser: userCred.user);
+                    Get.toNamed(HomePage.routeName);
+                    // user = await createUserInBackend(user: newUser);
+                  } else {
+                    //Old user, get from hive, if not present get from backend
+                    print("[] Fetch user with Firebase UID");
+                    user = await userController.getUserFromFirebase(firebaseUid: userCred.user.uid);
+                    UserController.to.user = user;
+                    Get.toNamed(HomePage.routeName);
+                  }
 
-                 Get.snackbar("Account logged in",
-                     "${user.email}",
-                     snackPosition: SnackPosition.BOTTOM, snackStyle: SnackStyle.FLOATING);
-                 print("[] Google sign in complete");
+                  Get.snackbar("Account logged in", "${user.email}",
+                      snackPosition: SnackPosition.BOTTOM, snackStyle: SnackStyle.FLOATING);
+                  print("[] Google sign in complete");
                 },
                 padding: EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(

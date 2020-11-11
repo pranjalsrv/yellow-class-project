@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
+import 'package:yellow_class_project/widgets/camera_view_widget.dart';
 
 class VideoPlayerPage extends StatefulWidget {
   static String routeName = '/video_player_page';
@@ -46,11 +47,15 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(video['link']);
     return Scaffold(
       body: chewieController != null && chewieController.videoPlayerController.value.initialized
-          ? Chewie(
-              controller: chewieController,
+          ? Stack(
+              children: [
+                Chewie(
+                  controller: chewieController,
+                ),
+                Container(width: 500, height: 500, child: CamerViewWidget())
+              ],
             )
           : Center(
               child: Column(
