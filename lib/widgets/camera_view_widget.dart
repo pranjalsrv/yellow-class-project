@@ -48,9 +48,8 @@ class _CamerViewWidgetState extends State<CamerViewWidget> {
 
   Future<void> initCamera() async {
     cameras = await availableCameras();
-    currentCamera = cameras.first;
     _controller = CameraController(
-      cameras[0],
+      cameras[1],
       ResolutionPreset.medium,
     );
     _initializeControllerFuture = _controller.initialize().then((_) {
@@ -87,18 +86,18 @@ class _CamerViewWidgetState extends State<CamerViewWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<void>(
-        future: _initializeControllerFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              print(snapshot.error);
-              return Center(child: CircularProgressIndicator());
-            }
-            return CameraPreview(_controller);
-          } else {
+      future: _initializeControllerFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            print(snapshot.error);
             return Center(child: CircularProgressIndicator());
           }
-        },
-      );
+          return AspectRatio(aspectRatio: _controller.value.aspectRatio, child: CameraPreview(_controller));
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+    );
   }
 }
