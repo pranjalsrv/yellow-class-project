@@ -58,14 +58,14 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
           print("[] New user google sign in");
           //New user
           user = userController.createNewUser(newUser: userCred.user);
-          Get.toNamed(HomePage.routeName);
+          Get.offAndToNamed(HomePage.routeName);
           // user = await createUserInBackend(user: newUser);
         } else {
           //Old user, get from hive, if not present get from backend
           print("[] Fetch user with Firebase UID");
           user = await userController.getUserFromFirebase(firebaseUid: userCred.user.uid);
           UserController.to.user = user;
-          Get.toNamed(HomePage.routeName);
+          Get.offAndToNamed(HomePage.routeName);
         }
 
         Get.snackbar("Account logged in",
@@ -115,14 +115,14 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
         print("[] New user google sign in");
         //New user
         user = userController.createNewUser(newUser: userCred.user);
-        Get.toNamed(HomePage.routeName);
+        Get.offAndToNamed(HomePage.routeName);
         // user = await createUserInBackend(user: newUser);
       } else {
         //Old user, get from hive, if not present get from backend
         print("[] Fetch user with Firebase UID");
         user = await userController.getUserFromFirebase(firebaseUid: userCred.user.uid);
         UserController.to.user = user;
-        Get.toNamed(HomePage.routeName);
+        Get.offAndToNamed(HomePage.routeName);
       }
 
       Get.snackbar("Account logged in",
