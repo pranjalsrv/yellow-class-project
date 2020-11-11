@@ -60,6 +60,10 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
               if (orientation == Orientation.landscape && yPosition > Get.mediaQuery.size.height) {
                 yPosition = 0;
               }
+
+              if (orientation == Orientation.portrait && xPosition > Get.mediaQuery.size.width) {
+                xPosition = 0;
+              }
               // print(Get.mediaQuery.orientation.index);
               return Stack(
                 children: [
