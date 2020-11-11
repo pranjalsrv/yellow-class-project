@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_util/responsive_util.dart';
 
 class CamerViewWidget extends StatefulWidget {
   @override
