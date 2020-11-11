@@ -51,6 +51,8 @@ dependencies:
 
   camera: ^0.5.8+11
 
+  responsive_util: ^0.3.0
+
 
 dev_dependencies:
   flutter_test:

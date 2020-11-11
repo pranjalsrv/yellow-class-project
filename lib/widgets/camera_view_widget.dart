@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:responsive_util/responsive_util.dart';
 
 class CamerViewWidget extends StatefulWidget {
   @override
@@ -86,18 +87,18 @@ class _CamerViewWidgetState extends State<CamerViewWidget> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<void>(
-      future: _initializeControllerFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasError) {
-            print(snapshot.error);
+        future: _initializeControllerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              print(snapshot.error);
+              return Center(child: CircularProgressIndicator());
+            }
+            return CameraPreview(_controller);
+          } else {
             return Center(child: CircularProgressIndicator());
           }
-          return CameraPreview(_controller);
-        } else {
-          return Center(child: CircularProgressIndicator());
-        }
-      },
-    );
+        },
+      );
   }
 }

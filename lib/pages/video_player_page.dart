@@ -17,6 +17,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   QueryDocumentSnapshot video = Get.arguments;
   VideoPlayerController videoPlayerController;
   ChewieController chewieController;
+  double xPosition = 0;
+  double yPosition = 0;
 
   Future<void> initPlayer() async {
     videoPlayerController = VideoPlayerController.network(video['link']);
@@ -54,7 +56,23 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                 Chewie(
                   controller: chewieController,
                 ),
-                Container(width: 500, height: 500, child: CamerViewWidget())
+                Positioned(
+                  top: yPosition,
+                  left: xPosition,
+                  child: GestureDetector(
+                    onPanUpdate: (tapInfo) {
+                      setState(() {
+                        xPosition += tapInfo.delta.dx;
+                        yPosition += tapInfo.delta.dy;
+                      });
+                    },
+                    child: Container(
+                        padding: EdgeInsets.all(30),
+                        width: Get.mediaQuery.size.width * 0.5,
+                        height: Get.mediaQuery.size.height * 0.4,
+                        child: CamerViewWidget()),
+                  ),
+                )
               ],
             )
           : Center(
