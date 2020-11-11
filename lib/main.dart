@@ -7,6 +7,7 @@ import 'package:yellow_class_project/pages/auth_page.dart';
 import 'package:yellow_class_project/pages/home_page.dart';
 import 'package:yellow_class_project/pages/phone_auth_page.dart';
 import 'package:yellow_class_project/pages/splash_page.dart';
+import 'package:yellow_class_project/pages/video_player_page.dart';
 import 'package:yellow_class_project/utils/page_transition.dart';
 import 'package:yellow_class_project/utils/theme.dart';
 
@@ -71,6 +72,12 @@ class YellowClassApp extends StatelessWidget {
                 GetPage(
                   name: PhoneAuthPage.routeName,
                   page: () => PhoneAuthPage(),
+                  customTransition: CustomSharedAxisTransition(),
+                  opaque: true,
+                ),
+                GetPage(
+                  name: VideoPlayerPage.routeName,
+                  page: () => VideoPlayerPage(),
                   customTransition: CustomSharedAxisTransition(),
                   opaque: true,
                 ),

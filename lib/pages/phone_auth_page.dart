@@ -2,9 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:yellow_class_project/controllers/auth_controller.dart';
 import 'package:yellow_class_project/controllers/user_controller.dart';
 import 'package:yellow_class_project/models/user.dart';
 
